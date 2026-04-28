@@ -6,71 +6,55 @@
         <field name="inherit_id" ref="base.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
-                
                 <div class="app_settings_block" data-string="Power BI Pro" string="Power BI Pro" data-key="odoobiconnect">
                     
-                    <h2>Security &amp; API Configuration</h2>
-                    <div class="row mt16 o_settings_container" name="powerbi_auth_section">
+                    <h2>Power BI API Configuration</h2>
+                    <div class="row mt16 o_settings_container">
                         
-                        <div class="col-12 col-lg-6 o_setting_box" id="jwt_management">
+                        <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_right_pane">
-                                <span class="o_form_label">Authentication Secret</span>
+                                <span class="o_form_label">Access Token</span>
                                 <div class="text-muted">
-                                    Define your unique JWT secret to encrypt OData communications.
+                                    Generate token and copy it to Power BI Desktop.
                                 </div>
-                                <div class="content-group mt8">
-                                    <div class="d-flex align-items-center">
-                                        <field name="jwt_secret" 
-                                               password="True" 
-                                               readonly="1" 
-                                               force_save="1" 
-                                               placeholder="Click generate to create a secret..."
-                                               class="w-75 fw-bold"/>
+                                <div class="content-group mt16">
+                                    <field name="generated_access_token" 
+                                           readonly="1" 
+                                           class="font-weight-bold text-primary p-2 bg-light border" 
+                                           style="width: 100%; word-break: break-all !important; display: block; min-height: 50px;"/>
+                                    
+                                    <div class="mt16">
                                         <button name="action_generate_jwt_secret" 
                                                 type="object" 
-                                                string="Rotate Key" 
-                                                class="btn btn-secondary ms-2" 
-                                                icon="fa-refresh"
-                                                confirm="Warning: Rotating the secret will invalidate existing connections. Continue?"/>
+                                                string="Generate New Token" 
+                                                class="btn-primary" 
+                                                icon="fa-refresh"/>
+                                        <field name="jwt_secret" invisible="1"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12 col-lg-6 o_setting_box" id="connection_gateway">
+                        <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_right_pane">
-                                <span class="o_form_label">OData Gateway</span>
+                                <span class="o_form_label">Power BI Template</span>
                                 <div class="text-muted">
-                                    Establish a direct secure tunnel to Power BI Desktop or Service.
+                                    Download the pre-configured PBIT file.
                                 </div>
                                 <div class="mt16">
                                     <button name="action_connect_to_powerbi" 
                                             type="object" 
-                                            string="Launch Power BI Connector" 
-                                            class="btn btn-primary" 
-                                            icon="fa-plug"/>
+                                            string="Download .PBIT File" 
+                                            class="btn-secondary" 
+                                            icon="fa-download"/>
                                     <div class="text-muted mt-2">
-                                        <i class="fa fa-info-circle me-1"/> 
-                                        Generates a secure OData endpoint with embedded session tokens.
+                                        <i class="fa fa-info-circle"/> v5.0.0 Pro Edition
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                     </div>
-
-                    <h2>System Status</h2>
-                    <div class="row mt16 o_settings_container" name="bi_status_section">
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <span class="o_form_label">Connector Version</span>
-                                <div class="mt8">
-                                    <span class="badge rounded-pill badge-info">v5.0.0 Pro Edition</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </xpath>
         </field>

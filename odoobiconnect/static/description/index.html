@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Showcase | Power BI Connector Pro for Odoo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lux-dark: #121212; /* Rich Charcoal */
+            --lux-navy: #1E293B; /* Deep Navy */
+            --lux-gold: #D4AF37; /* Metallic Gold */
+            --lux-grey: #475569;
+            --lux-bg: #FAFBFD; /* Subtle Off-White */
+            --text-main: #FFFFFF;
+            --text-muted: #CBD5E1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--lux-bg);
+            color: var(--lux-navy);
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1400px; /* Spacious width for luxury feel */
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* --- Elegant Header/Banner Section --- */
+        .header-showcase {
+            background: linear-gradient(135deg, var(--lux-dark) 0%, var(--lux-navy) 100%);
+            border-radius: 20px;
+            padding: 60px;
+            color: var(--text-main);
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            margin-bottom: 60px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Subtle gold accent border on top */
+        .header-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background-color: var(--lux-gold);
+        }
+
+        /* --- The Main Banner Image --- */
+        .main-banner-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .main-banner-container:hover {
+            transform: scale(1.02);
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 3.5rem; /* Large, premium size */
+            margin-top: 0;
+            margin-bottom: 10px;
+            letter-spacing: -1.5px;
+        }
+
+        h1 span.edition {
+            color: var(--lux-gold);
+            font-size: 2rem;
+            vertical-align: super;
+            margin-left: 10px;
+        }
+
+        p.hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- Section Titles --- */
+        .section-header {
+            text-align: center;
+            margin-top: 80px;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            color: var(--lux-dark);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--lux-gold);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--lux-grey);
+            margin-top: 0;
+            font-weight: 300;
+        }
+
+        /* --- Premium Video Experience --- */
+        .video-container {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        video {
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 12px;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        video:hover {
+            transform: scale(1.01); /* Subtle premium interaction */
+        }
+
+        /* --- Cinematic Screenshot Gallery --- */
+        .gallery-wrap {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .screenshot-item {
+            background-color: #FFFFFF;
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #EDEDED;
+        }
+
+        /* Premium glow on hover */
+        .screenshot-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            border-color: rgba(212, 175, 55, 0.3); /* Subtle Gold Border */
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            cursor: pointer;
+        }
+
+        /* Subtle text label inside the gallery item */
+        .screenshot-item::after {
+            content: 'High-Fidelity Integration';
+            position: absolute;
+            bottom: -30px;
+            left: 20px;
+            color: var(--lux-grey);
+            font-size: 0.9rem;
+            transition: bottom 0.3s ease;
+            font-weight: 300;
+        }
+
+        .screenshot-item:hover::after {
+            bottom: 20px;
+        }
+
+        /* --- Minimalist Luxury Footer --- */
+        footer {
+            background-color: var(--lux-dark);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 100px;
+            border-radius: 20px 20px 0 0;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        footer strong {
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header class="header-showcase">
+            <div class="main-banner-container">
+                <img src="banner.png" alt="Power BI Connector Pro Enterprise Banner" class="banner-img" onerror="this.parentElement.style.display='none'">
+            </div>
+            
+            <h1>Power BI Connector Pro<span class="edition"></span></h1>
+            <p class="hero-subtitle">Connect Odoo to Power BI Desktop seamlessly using OData Feed.
+        - Secure Authentication via JWT (JSON Web Tokens).
+        - No SQL port opening required (Uses HTTPS/8069).
+        - Multi-company and Multi-database support.
+        - Compatible with Odoo 12, 13, 14, 15, 16, and 17+.</p>
+        </header>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">PROJECT DEMONSTRATION</h2>
+                <p class="section-subtitle">A high-definition overview of advanced Odoo analytical capabilities</p>
+            </div>
+            <div class="video-container">
+                <video controls poster="video_poster.png">
+                    <source src="odoobiconnect_demo.mp4" type="video/mp4">
+                    Your browser does not support high-fidelity video playback.
+                </video>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">HIGH-RESOLUTION SHOWCASE</h2>
+                <p class="section-subtitle">Visualizing deep integration, JWT security, and interactive dashboards</p>
+            </div>
+            <div class="gallery-wrap">
+                
+                <div class="screenshot-item">
+                    <img src="screenshot_01.png" alt="Odoo Configuration Dashboard Overview">
+                </div>
+                
+                <div class="screenshot-item">
+                    <img src="screenshot_02.png" alt="Secure JWT Token Generation">
+                </div>
+                
+                <div class="screenshot-item">
+                    <img src="screenshot_03.png" alt="Power BI OData Connection Dialog">
+                </div>
+                
+                <div class="screenshot-item">
+                    <img src="screenshot_04.png" alt="Dynamic Odoo Data Feed in Power BI">
+                </div>
+                
+                <div class="screenshot-item">
+                    <img src="screenshot_05.png" alt="Sales Performance Analytics Dashboard">
+                </div>
+                
+                <div class="screenshot-item">
+                    <img src="screenshot_06.png" alt="Financial Reports and KPI Visualization">
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><strong>Power BI Connector Pro Enterprise Edition</strong><br>
+        © 2026. All rights reserved. Secured OData Analytics for Intelligent Enterprises.</p>
+    </footer>
+
+</body>
+</html>

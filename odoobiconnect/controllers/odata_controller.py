@@ -2,7 +2,7 @@
 import json
 import datetime
 import logging
-import jwt
+import jwt  # مكتبة فك تشفير التوكن الديناميكي
 from odoo import http
 from odoo.http import request, Response
 
@@ -12,7 +12,7 @@ class OdooPowerBIConnector(http.Controller):
 
     @http.route('/odata/data/<string:model_name>', type='http', auth='public', methods=['GET', 'OPTIONS'], cors='*', csrf=False)
     def get_odoo_data(self, model_name, **kwargs):
-
+        
         headers = {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Methods': 'GET, OPTIONS',
@@ -27,27 +27,28 @@ class OdooPowerBIConnector(http.Controller):
             secret_key = param_obj.get_param('odoobiconnect.jwt_secret')
             
             client_token = kwargs.get('token')
+            #client_token = request.httprequest.headers.get('Authorization')
             if not secret_key:
-                _logger.error("❌ Error: Not set. odoobiconnect.jwt_secret in System Parameters")
+                _logger.error("❌ Error: odoobiconnect.jwt_secret is not set in System Parameters.")
                 return Response(json.dumps({"error": "Configuration Missing"}), status=500, headers=headers)
 
             if not client_token:
-                _logger.warning("🛑 Login Rejected: The token is missing from the link.")
+                _logger.warning("🛑 Access denied: The token is missing from the link.")
                 return Response(json.dumps({"error": "Token Required"}), status=403, headers=headers)
 
             try:
                 jwt.decode(client_token, secret_key, algorithms=['HS256'])
             except jwt.ExpiredSignatureError:
-                _logger.warning("🛑 Login Rejected: The token has expired.")
+                _logger.warning("🛑 Access denied: The token has expired.")
                 return Response(json.dumps({"error": "Token Expired"}), status=403, headers=headers)
             except jwt.InvalidTokenError:
-                _logger.warning("🛑 Login Rejected: The token is literally invalid.")
+                _logger.warning("🛑 Access denied: The token is literally invalid.")
                 return Response(json.dumps({"error": "Invalid Token Signature"}), status=403, headers=headers)
 
             formatted_model = model_name.replace('_', '.')
             
             if formatted_model not in request.env:
-                _logger.error("❌ Model %s does not exist in the Odoo database", formatted_model)
+                _logger.error("❌ The %s model does not exist in the Odoo database.", formatted_model)
                 return Response(json.dumps({"error": f"Model {formatted_model} not found"}), status=404, headers=headers)
 
             records = request.env[formatted_model].sudo().search_read([], limit=5000)
@@ -66,9 +67,9 @@ class OdooPowerBIConnector(http.Controller):
                         row[k] = v
                 processed_data.append(row)
 
-            _logger.info("✅ %s record from model %s was successfully sent", len(processed_data), formatted_model)
+            _logger.info("✅ %s record from model %s was successfully submitted.", len(processed_data), formatted_model)
             return Response(json.dumps({"value": processed_data}, default=str), status=200, headers=headers)
 
         except Exception as e:
-            _logger.error("🔥 Read the following instructions: %s", str(e))
+            _logger.error("🔥 Unexpected controller error: %s", str(e))
             return Response(json.dumps({"error": "Internal Server Error", "details": str(e)}), status=500, headers=headers)

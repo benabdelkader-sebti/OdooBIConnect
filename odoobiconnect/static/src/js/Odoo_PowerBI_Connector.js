@@ -12,14 +12,14 @@ export const PowerBIConnectorAction = {
 
         if (token) {            
             await browser.navigator.clipboard.writeText(token);            
-            notification.add(_t("تم نسخ رمز الدخول! افتح الملف وقم بلصقه في خانة Access_Token"), {
+            notification.add(_t("The access code has been copied! Open the file and paste it into the Access_Token field."), {
                 type: "success",
             });
             
             const templateUrl = "/odoobiconnect/static/src/pbit/odoo_universal_connection_power_bi_data.pbit";
             browser.location.href = templateUrl;
         } else {
-            notification.add(_t("يرجى توليد رمز الدخول أولاً"), { type: "danger" });
+            notification.add(_t("Access_Token field. Please generate the access token first."), { type: "danger" });
         }
     }
 };

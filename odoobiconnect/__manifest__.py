@@ -1,6 +1,6 @@
 {
     "name": "OdooBIConnect",
-    "version": "16.0.5.0.0",
+    "version": "15.0.5.0.0",
     'category': 'Tools',
     'summary': 'Odoo Power BI Connect Pro',
     'description': """

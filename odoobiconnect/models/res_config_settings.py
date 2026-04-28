@@ -17,11 +17,10 @@ class ResConfigSettings(models.TransientModel):
     generated_access_token = fields.Text(
         string="Access Token (Copiable)",
         readonly=True,
-        help="Copiez ce code et collez-le dans Power BI"
+        help="Copy this code and paste it into Power BI"
     )
 
     def action_generate_jwt_secret(self):
-        """توليد السر وحفظه في النظام"""
         new_secret = secrets.token_urlsafe(32)
         self.env['ir.config_parameter'].sudo().set_param('odoobiconnect.jwt_secret', new_secret)
         self.jwt_secret = new_secret
@@ -40,12 +39,11 @@ class ResConfigSettings(models.TransientModel):
         }
 
     def _generate_display_token(self):
-        """دالة داخلية لتوليد JWT لعرضه للمستخدم"""
         secret = self.env['ir.config_parameter'].sudo().get_param('odoobiconnect.jwt_secret')
         if secret:
             payload = {
                 'user_id': self.env.user.id,
-                'exp': datetime.utcnow() + timedelta(days=365)
+                'exp': datetime.utcnow() + timedelta(days=365) 
             }
             token = jwt.encode(payload, secret, algorithm='HS256')
             if isinstance(token, bytes):
@@ -53,7 +51,6 @@ class ResConfigSettings(models.TransientModel):
             self.generated_access_token = token
 
     def action_connect_to_powerbi(self):
-        """توليد التوكن وإرساله لواجهة العميل لنسخه وتحميل القالب"""
         self._generate_display_token()
         if not self.generated_access_token:
             raise UserError(_("Please generate a secret key first."))

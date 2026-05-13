@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit_bi" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.powerbi.pro</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="Power BI Pro" name="odoobiconnect" data-key="odoobiconnect" icon="fa-area-chart">
+                    
+                    <block title="Security &amp; API Configuration" name="powerbi_auth_section">
+                        <div class="row mt16 o_settings_container">
+                            
+                            <setting id="jwt_management" title="Authentication Secret" help="Define your unique JWT secret to encrypt OData communications.">
+                                <div class="content-group">
+                                    <div class="d-flex align-items-center mt8">
+                                        <field name="jwt_secret" 
+                                               password="True" 
+                                               readonly="1" 
+                                               force_save="1" 
+                                               placeholder="Click generate to create a secret..."
+                                               class="w-75 fw-bold"/>
+                                        <button name="action_generate_jwt_secret" 
+                                                type="object" 
+                                                string="Rotate Key" 
+                                                class="btn-outline-secondary ms-2" 
+                                                icon="fa-refresh"
+                                                confirm="Warning: Rotating the secret will invalidate existing connections. Continue?"/>
+                                    </div>
+                                </div>
+                            </setting>
+
+                            <setting id="connection_gateway" title="OData Gateway" help="Establish a direct secure tunnel to Power BI Desktop or Service.">
+                                <div class="mt16">
+                                    <button name="action_connect_to_powerbi" 
+                                            type="object" 
+                                            string="Launch Power BI Connector" 
+                                            class="btn-primary" 
+                                            icon="fa-plug"/>
+                                    <div class="text-muted mt-2">
+                                        <i class="fa fa-info-circle me-1"/> 
+                                        Generates a secure OData endpoint with embedded session tokens.
+                                    </div>
+                                </div>
+                            </setting>
+
+                        </div>
+                    </block>
+
+                    <block title="System Status" name="bi_status_section">
+                        <div class="row mt16 o_settings_container">
+                            <setting title="Connector Version">
+                                <span class="badge rounded-pill text-bg-info">v5.0.0 Pro Edition</span>
+                            </setting>
+                        </div>
+                    </block>
+
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

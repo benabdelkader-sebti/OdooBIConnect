@@ -1,0 +1,40 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.2"></feDropShadow>
+    </filter>
+
+    <!-- Path for Power BI text -->
+    <path id="powerPath" d="
+      M 350 110
+      C 460 150, 460 320, 340 380
+      C 230 420, 160 300, 250 240
+      C 290 210, 320 180, 350 110
+    "></path>
+  </defs>
+
+  <!-- Purple Loop -->
+  <path d="
+    M 170 380
+    C 60 320, 60 150, 180 110
+    C 290 80, 360 200, 270 270
+    C 230 300, 200 320, 170 380
+  " fill="none" stroke="#875A7B" stroke-width="48" stroke-linecap="round" filter="url(#shadow)"></path>
+
+  <!-- Yellow Loop -->
+  <use href="#powerPath" fill="none" stroke="#F2C811" stroke-width="48" stroke-linecap="round" filter="url(#shadow)"></use>
+
+  <!-- Odoo Text -->
+  <text x="180" y="135" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="600" fill="#FFFFFF" transform="rotate(-18 180,135)">
+    Odoo
+  </text>
+
+  <!-- Power BI Text on curve -->
+  <text font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="600" fill="#FFFFFF">
+    <textPath href="#powerPath" startOffset="65%">
+      Power BI
+    </textPath>
+  </text>
+
+</svg>

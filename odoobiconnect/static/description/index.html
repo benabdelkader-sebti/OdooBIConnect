@@ -1,303 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enterprise Showcase | Power BI Connector Pro for Odoo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<section style="background-color: #030712; color: #F1F5F9; font-family: 'Inter', sans-serif; padding: 0; margin: 0; direction: ltr;">
+
     <style>
-        :root {
-            --lux-dark: #121212; /* Rich Charcoal */
-            --lux-navy: #1E293B; /* Deep Navy */
-            --lux-gold: #D4AF37; /* Metallic Gold */
-            --lux-grey: #475569;
-            --lux-bg: #FAFBFD; /* Subtle Off-White */
-            --text-main: #FFFFFF;
-            --text-muted: #CBD5E1;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--lux-bg);
-            color: var(--lux-navy);
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
-        }
-
-        .container {
-            max-width: 1400px; /* Spacious width for luxury feel */
-            margin: 0 auto;
-            padding: 40px;
-        }
-
-        /* --- Elegant Header/Banner Section --- */
-        .header-showcase {
-            background: linear-gradient(135deg, var(--lux-dark) 0%, var(--lux-navy) 100%);
-            border-radius: 20px;
-            padding: 60px;
-            color: var(--text-main);
-            text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-            margin-bottom: 60px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Subtle gold accent border on top */
-        .header-showcase::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background-color: var(--lux-gold);
-        }
-
-        /* --- The Main Banner Image --- */
-        .main-banner-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 2px solid rgba(255,255,255,0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .main-banner-container:hover {
-            transform: scale(1.02);
-        }
-
-        .banner-img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        h1 {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 800;
-            font-size: 3.5rem; /* Large, premium size */
-            margin-top: 0;
-            margin-bottom: 10px;
-            letter-spacing: -1.5px;
-        }
-
-        h1 span.edition {
-            color: var(--lux-gold);
-            font-size: 2rem;
-            vertical-align: super;
-            margin-left: 10px;
-        }
-
-        p.hero-subtitle {
-            font-size: 1.4rem;
-            color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-
-        /* --- Section Titles --- */
-        .section-header {
-            text-align: center;
-            margin-top: 80px;
-            margin-bottom: 50px;
-        }
-
-        .section-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.2rem;
-            color: var(--lux-dark);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--lux-gold);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--lux-grey);
-            margin-top: 0;
-            font-weight: 300;
-        }
-
-        /* --- Premium Video Experience --- */
-        .video-container {
-            background-color: #FFFFFF;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-            text-align: center;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        video {
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 12px;
-            outline: none;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        video:hover {
-            transform: scale(1.01); /* Subtle premium interaction */
-        }
-
-        /* --- Cinematic Screenshot Gallery --- */
-        .gallery-wrap {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-
-        .screenshot-item {
-            background-color: #FFFFFF;
-            padding: 15px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s ease-in-out;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #EDEDED;
-        }
-
-        /* Premium glow on hover */
-        .screenshot-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            border-color: rgba(212, 175, 55, 0.3); /* Subtle Gold Border */
-        }
-
-        .screenshot-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-            cursor: pointer;
-        }
-
-        /* Subtle text label inside the gallery item */
-        .screenshot-item::after {
-            content: 'High-Fidelity Integration';
-            position: absolute;
-            bottom: -30px;
-            left: 20px;
-            color: var(--lux-grey);
-            font-size: 0.9rem;
-            transition: bottom 0.3s ease;
-            font-weight: 300;
-        }
-
-        .screenshot-item:hover::after {
-            bottom: 20px;
-        }
-
-        /* --- Minimalist Luxury Footer --- */
-        footer {
-            background-color: var(--lux-dark);
-            color: var(--text-muted);
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 100px;
-            border-radius: 20px 20px 0 0;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-
-        footer strong {
-            color: #FFFFFF;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
+        /* التنسيقات الأساسية */
+        .obc-main { max-width: 1200px; margin: 0 auto; padding: 20px; }
         
-        <header class="header-showcase">
-            <div class="main-banner-container">
-                <img src="banner.png" alt="Power BI Connector Pro Enterprise Banner" class="banner-img" onerror="this.parentElement.style.display='none'">
-            </div>
-            
-            <h1>Power BI Connector Pro<span class="edition"></span></h1>
-            <p class="hero-subtitle">Connect Odoo to Power BI Desktop seamlessly using OData Feed.
-        - Secure Authentication via JWT (JSON Web Tokens).
-        - No SQL port opening required (Uses HTTPS/8069).
-        - Multi-company and Multi-database support.
-        - Compatible with Odoo 12, 13, 14, 15, 16, and 17+.</p>
-        </header>
+        /* تأثير تكبير الصور بدون جافاسكريبت (CSS Lightbox) */
+        .obc-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            text-align: center;
+        }
+        .obc-lightbox:target { display: flex; justify-content: center; align-items: center; }
+        .obc-lightbox img { max-width: 90%; max-height: 80%; border: 3px solid #C9A03D; border-radius: 10px; }
+        .obc-close { position: absolute; top: 20px; right: 30px; color: #fff; font-size: 40px; text-decoration: none; font-weight: bold; }
 
-        <section>
-            <div class="section-header">
-                <h2 class="section-title">PROJECT DEMONSTRATION</h2>
-                <p class="section-subtitle">A high-definition overview of advanced Odoo analytical capabilities</p>
-            </div>
-            <div class="video-container">
-                <video controls poster="video_poster.png">
+        /* قسم الهيرو والبانر */
+        .obc-banner-box { width: 100%; border-radius: 16px; overflow: hidden; border: 1px solid rgba(201,160,61,0.2); margin-bottom: 30px; }
+        .obc-title { font-size: 3rem; font-weight: 800; text-align: center; margin: 20px 0; background: linear-gradient(135deg, #FFF, #D4AF37); -webkit-background-clip: text; color: transparent; }
+        
+        /* بطاقات التواصل */
+        .obc-contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .obc-info-card { background: #0F172A; padding: 1.5rem; border-radius: 1rem; text-align: center; border-bottom: 2px solid #C9A03D; }
+        .obc-info-card div { color: #C9A03D; font-weight: bold; margin-bottom: 5px; }
+
+        /* معرض الصور (المستندات) */
+        .obc-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 40px 0; }
+        .obc-card { background: #0f172a; border-radius: 15px; overflow: hidden; border: 1px solid rgba(201, 160, 61, 0.1); transition: 0.3s; text-decoration: none; }
+        .obc-card:hover { border-color: #C9A03D; }
+        .obc-card img { width: 100%; height: auto; display: block; }
+        .obc-card-label { padding: 12px; background: #161e2e; color: #94a3b8; font-size: 0.85rem; text-align: center; }
+
+        /* الفوتر المخصص (مطابق لـ 1.png) */
+        .obc-footer {
+            background: #03050A; 
+            border-radius: 50px 50px 0 0; 
+            padding: 60px 20px; 
+            text-align: center; 
+            border-top: 1px solid rgba(201,160,61,0.15);
+            margin-top: 60px;
+        }
+        .obc-footer-brand { font-size: 1.4rem; font-weight: 700; color: #FFFFFF; margin-bottom: 10px; }
+        .obc-footer-gold { color: #C9A03D; }
+        .obc-footer-versions { color: #5A668A; font-size: 0.8rem; margin-top: 10px; }
+    </style>
+
+    <div class="obc-main">
+        <div class="obc-banner-box">
+            <img src="banner.gif" style="width: 100%;" alt="Power BI Connector Pro">
+        </div>
+
+        <h1 class="obc-title">Power BI Connector <span style="color: #D4AF37;">Pro</span></h1>
+
+        <div class="obc-contact-grid">
+            <div class="obc-info-card"><div>Free Demo</div> benabdelkader506@gmail.com</div>
+            <div class="obc-info-card"><div>Lifetime Support</div> benabdelkader506@gmail.com</div>
+            <div class="obc-info-card"><div>Customization</div> benabdelkader506@gmail.com</div>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0;">
+            <a href="https://youtu.be/9RicXvZ6_GI" target="_blank" style="display: inline-block; background: #E62117; color: #fff; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: bold; margin-bottom: 20px;">▶ Watch Full Demo</a>
+            <div style="background: #000; padding: 10px; border-radius: 20px; border: 1px solid #C9A03D;">
+                <video controls style="width: 100%; border-radius: 15px;">
                     <source src="odoobiconnect_demo.mp4" type="video/mp4">
-                    Your browser does not support high-fidelity video playback.
                 </video>
             </div>
-        </section>
+        </div>
 
-        <section>
-            <div class="section-header">
-                <h2 class="section-title">HIGH-RESOLUTION SHOWCASE</h2>
-                <p class="section-subtitle">Visualizing deep integration, JWT security, and interactive dashboards</p>
-            </div>
-            <div class="gallery-wrap">
-                
-                <div class="screenshot-item">
-                    <img src="screenshot_01.png" alt="Odoo Configuration Dashboard Overview">
-                </div>
-                
-                <div class="screenshot-item">
-                    <img src="screenshot_02.png" alt="Secure JWT Token Generation">
-                </div>
-                
-                <div class="screenshot-item">
-                    <img src="screenshot_03.png" alt="Power BI OData Connection Dialog">
-                </div>
-                
-                <div class="screenshot-item">
-                    <img src="screenshot_04.png" alt="Dynamic Odoo Data Feed in Power BI">
-                </div>
-                
-                <div class="screenshot-item">
-                    <img src="screenshot_05.png" alt="Sales Performance Analytics Dashboard">
-                </div>
-                
-                <div class="screenshot-item">
-                    <img src="screenshot_06.png" alt="Financial Reports and KPI Visualization">
-                </div>
-
-            </div>
-        </section>
-
+        <h2 style="color: #D4AF37; text-align: center;">Document Showcase (Click to Enlarge)</h2>
+        <div class="obc-gallery">
+            <a href="#img1" class="obc-card">
+                <img src="screenshot_01.png">
+                <div class="obc-card-label">⚙️ Configuration Hub</div>
+            </a>
+            <a href="#img2" class="obc-card">
+                <img src="screenshot_02.png">
+                <div class="obc-card-label">🔑 JWT Token Engine</div>
+            </a>
+            <a href="#img3" class="obc-card">
+                <img src="screenshot_03.png">
+                <div class="obc-card-label">🔌 OData Connector</div>
+            </a>
+            <a href="#img4" class="obc-card">
+                <img src="screenshot_04.png">
+                <div class="obc-card-label">📊 Live Data Feed</div>
+            </a>
+            <a href="#img5" class="obc-card">
+                <img src="screenshot_05.png">
+                <div class="obc-card-label">📈 Sales Dashboard</div>
+            </a>
+            <a href="#img6" class="obc-card">
+                <img src="screenshot_06.png">
+                <div class="obc-card-label">💰 Financial KPIs</div>
+            </a>
+        </div>
     </div>
 
-    <footer>
-        <p><strong>Power BI Connector Pro Enterprise Edition</strong><br>
-        © 2026. All rights reserved. Secured OData Analytics for Intelligent Enterprises.</p>
+    <div id="img1" class="obc-lightbox"><a href="#close" class="obc-close">&times;</a><img src="screenshot_01.png"></div>
+    <div id="img2" class="obc-lightbox"><a href="#close" class="obc-close">&times;</a><img src="screenshot_02.png"></div>
+    <div id="img3" class="obc-lightbox"><a href="#close" class="obc-close">&times;</a><img src="screenshot_03.png"></div>
+    <div id="img4" class="obc-lightbox"><a href="#close" class="obc-close">&times;</a><img src="screenshot_04.png"></div>
+    <div id="img5" class="obc-lightbox"><a href="#close" class="obc-close">&times;</a><img src="screenshot_05.png"></div>
+    <div id="img6" class="obc-lightbox"><a href="#close" class="obc-close">&times;</a><img src="screenshot_06.png"></div>
+
+    <footer class="obc-footer">
+        <div class="obc-footer-brand">
+            Power BI Connector Pro <span class="obc-footer-gold">Enterprise Edition</span>
+        </div>
+        <div style="color: #7E8AA2; font-size: 0.85rem; margin-bottom: 5px;">
+            © 2026 — All intellectual property reserved. Secured OData Analytics for Intelligent Enterprises.
+        </div>
+        <div class="obc-footer-versions">
+            Compatible with Odoo 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0
+        </div>
     </footer>
 
-</body>
-</html>
+</section>

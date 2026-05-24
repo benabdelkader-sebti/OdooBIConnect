@@ -1,8 +1,8 @@
 {
-    "name": "OdooBIConnect",
+    "name": "Odoo_BI_Connect",
     "version": "19.0.5.0.0",
     'category': 'Tools',
-    'summary': 'Odoo Power BI Connect Pro',
+    'summary': 'Odoo Power BI Connection',
     'description': """
         Connect Odoo to Power BI Desktop seamlessly using OData Feed.
         - Secure Authentication via JWT (JSON Web Tokens).

@@ -23,7 +23,7 @@
     ],
     },
     'images': ['static/description/banner.png'],
-    'price': 50.00,
+    'price': 20.00,
     'currency': 'EUR',
     'installable': True,
     'application': True,
